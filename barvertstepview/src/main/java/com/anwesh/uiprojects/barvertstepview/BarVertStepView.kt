@@ -4,6 +4,7 @@ package com.anwesh.uiprojects.barvertstepview
  * Created by anweshmishra on 05/10/18.
  */
 
+import android.app.Activity
 import android.view.View
 import android.view.MotionEvent
 import android.graphics.Paint
@@ -186,6 +187,14 @@ class BarVertStepView(ctx : Context) : View(ctx) {
             bvs.startUpdating {
                 animator.start()
             }
+        }
+    }
+
+    companion object {
+        fun create(activity : Activity) : BarVertStepView {
+            val view : BarVertStepView = BarVertStepView(activity)
+            activity.setContentView(view)
+            return view
         }
     }
 }
