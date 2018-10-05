@@ -165,4 +165,25 @@ class BarVertStepView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : BarVertStepView) {
+        private val animator : Animator = Animator(view)
+        private val bvs : BarVertStep = BarVertStep(0)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(Color.parseColor("#BDBDBD"))
+            bvs.draw(canvas, paint)
+            animator.animate {
+                bvs.update {i, scl ->
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            bvs.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
