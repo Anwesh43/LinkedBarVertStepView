@@ -14,6 +14,25 @@ import android.content.Context
 
 val nodes : Int = 5
 
+fun Canvas.drawBVSNode(i : Int, paint : Paint, scale : Float) {
+    val w : Float = width.toFloat()
+    val h : Float = height.toFloat()
+    val gap = w / (nodes + 1)
+    val size : Float = gap / 3
+    paint.color = Color.parseColor("#0D47A1")
+    save()
+    translate(gap * i + gap, h/2)
+    for (j in 0..1) {
+        val sf : Float = 1f - 2 * j
+        val sc : Float = Math.min(0.5f, Math.max(scale - 0.5f * j, 0f)) * 2
+        save()
+        scale(1f, sf)
+        drawRect(RectF(-size, -h/2, size, -h/2 + (h/2) * sc), paint)
+        restore()
+    }
+    restore()
+}
+
 class BarVertStepView(ctx : Context) : View(ctx) {
 
     private val paint : Paint = Paint(Paint.ANTI_ALIAS_FLAG)
@@ -74,7 +93,7 @@ class BarVertStepView(ctx : Context) : View(ctx) {
 
         fun stop() {
             if (animated) {
-                animated = false 
+                animated = false
             }
         }
     }
