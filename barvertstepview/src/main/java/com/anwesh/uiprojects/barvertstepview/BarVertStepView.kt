@@ -119,7 +119,7 @@ class BarVertStepView(ctx : Context) : View(ctx) {
 
         fun draw(canvas : Canvas, paint : Paint) {
             canvas.drawBVSNode(i, paint, state.scale)
-            next?.draw(canvas, paint)
+            prev?.draw(canvas, paint)
         }
 
         fun update(cb : (Int, Float) -> Unit) {
@@ -147,12 +147,11 @@ class BarVertStepView(ctx : Context) : View(ctx) {
 
     data class BarVertStep(var i : Int) {
 
-        private var root : BVSNode = BVSNode(0)
-        private var curr : BVSNode = root
+        private var curr : BVSNode = BVSNode(0)
         private var dir : Int = 1
 
         fun draw(canvas : Canvas, paint : Paint) {
-            root.draw(canvas, paint)
+            curr.draw(canvas, paint)
         }
 
         fun update(cb : (Int, Float) -> Unit) {
